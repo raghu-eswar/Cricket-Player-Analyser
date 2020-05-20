@@ -9,11 +9,11 @@ import java.util.*;
 public class PlayerAnalyser {
 
     public enum Options {
-        BATTING_AVERAGE, STRIKE_RATE;
+        BATTING_AVERAGE, STRIKE_RATE, FOURS, SIXES;
     }
 
     private enum PropertyNames {
-        BATTING_AVERAGE("battingAverage"), STRIKE_RATE("strikeRate");
+        BATTING_AVERAGE("battingAverage"), STRIKE_RATE("strikeRate"),FOURS("fours"), SIXES("sixes");
         private final String fieldName;
         PropertyNames(String fieldName) {
             this.fieldName = fieldName;
@@ -27,31 +27,45 @@ public class PlayerAnalyser {
         return this.playerDataMap.size();
     }
 
-    public List<String> getPlayersWithBest(Options options) throws PlayerAnalyserException {
+    public List<String> getPlayersWithBest(Options ... options) throws PlayerAnalyserException {
         throwNoDataException();
-        return getPlayersWithBest(PropertyNames.valueOf(options.name()).fieldName);
+        String [] fieldNames = new String[options.length];
+        for (int i = 0; i < options.length; i++) {
+            fieldNames[i] = PropertyNames.valueOf(options[i].name()).fieldName;
+        }
+        return getPlayersWithBest(fieldNames);
     }
 
-    private List<String> getPlayersWithBest(String fieldName) {
-        double maxValue = 0;
-        try {
-            maxValue = (double) PropertyUtils.getProperty(getPlayerWithMaximumValue(fieldName), fieldName);
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        double finalMaxValue = maxValue;
-        playerDataMap.values().parallelStream().forEach(playerDAO -> setPlayerRating(playerDAO,fieldName,finalMaxValue));
+    private List<String> getPlayersWithBest(String ... fieldNames) {
+        setPlayersRating(fieldNames);
         Comparator<PlayerDAO> comparator = Comparator.comparing(PlayerDAO::getRating);
         List<PlayerDTO> dtoList = buildPlayerDTO(sort(new ArrayList<>(playerDataMap.values()),comparator));
         return toJSONString(dtoList);
     }
 
-    private void setPlayerRating(PlayerDAO playerDAO, String fieldName, double finalMaxValue) {
+    private double getPlayerRating(PlayerDAO playerDAO, String fieldName, double finalMaxValue) {
         try {
-            double rating = ((double)PropertyUtils.getProperty(playerDAO, fieldName)/ finalMaxValue)*100;
-            playerDAO.setRating(rating);
+            return ((Double.parseDouble(PropertyUtils.getProperty(playerDAO, fieldName).toString()))/ finalMaxValue)*100;
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
+        }
+        return 0;
+    }
+
+    private void setPlayersRating(String ... fieldNames) {
+        for (PlayerDAO player:playerDataMap.values()) {
+            double maxValue = 0;
+            double rating = 0;
+            try {
+                for (String fieldName : fieldNames) {
+                    maxValue = Double.parseDouble(PropertyUtils.getProperty(getPlayerWithMaximumValue(fieldName), fieldName).toString());
+                    rating = rating + getPlayerRating(player, fieldName, maxValue);
+                }
+            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            double finalRating = rating/fieldNames.length;
+            player.setRating(finalRating);
         }
     }
 
@@ -60,7 +74,9 @@ public class PlayerAnalyser {
                 .stream()
                 .reduce(new PlayerDAO(), (p1, p2) -> {
                     try {
-                        return ((double)PropertyUtils.getProperty(p1, fieldName)>(double)PropertyUtils.getProperty(p2, fieldName))? p1 : p2;
+                        double p1Value = Double.parseDouble(PropertyUtils.getProperty(p1, fieldName).toString());
+                        double p2Value = Double.parseDouble(PropertyUtils.getProperty(p2, fieldName).toString());
+                        return (p1Value>p2Value)? p1 : p2;
                     } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
