@@ -14,6 +14,7 @@ public class PlayerDAO {
     private int halfCenturies;
     private int fours;
     private int sixes;
+    private double rating;
 
     public PlayerDAO(BatsmanPlayerCSV batsmanPlayerCSV) {
         this.playerName = batsmanPlayerCSV.getPlayerName();
@@ -29,6 +30,10 @@ public class PlayerDAO {
         this.halfCenturies = getInteger(batsmanPlayerCSV.getHalfCenturies());
         this.fours = getInteger(batsmanPlayerCSV.getFours());
         this.sixes = getInteger(batsmanPlayerCSV.getSixes());
+    }
+
+    public PlayerDAO() {
+
     }
 
     public String getPlayerName() {
@@ -133,6 +138,14 @@ public class PlayerDAO {
 
     public void setSixes(int sixes) {
         this.sixes = sixes;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
     private int getInteger(String string) {
