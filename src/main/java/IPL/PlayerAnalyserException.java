@@ -2,7 +2,7 @@ package IPL;
 
 public class PlayerAnalyserException extends Exception {
     enum ExceptionType {
-        UNABLE_TO_PARSE, PROBLEM_IN_FIELDS, CSV_FILE_PROBLEM, EMPTY_FIELDS;
+        UNABLE_TO_PARSE, PROBLEM_IN_FIELDS, NO_DATA, CSV_FILE_PROBLEM, EMPTY_FIELDS;
     }
 
     ExceptionType type;

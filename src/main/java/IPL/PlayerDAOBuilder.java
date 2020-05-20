@@ -20,11 +20,11 @@ public class PlayerDAOBuilder {
     public Map<String, PlayerDAO> loadPlayersData(String playerCSVFilePath) throws PlayerAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(playerCSVFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.getCsvBuilder();
-            Iterator<BatsmanCSV> csvIterator = csvBuilder.getCsvIterator(reader, BatsmanCSV.class);
-            Iterable<BatsmanCSV> csvIterable = () -> csvIterator;
+            Iterator<BatsmanPlayerCSV> csvIterator = csvBuilder.getCsvIterator(reader, BatsmanPlayerCSV.class);
+            Iterable<BatsmanPlayerCSV> csvIterable = () -> csvIterator;
             StreamSupport.stream(csvIterable.spliterator(), false)
                     .parallel()
-                    .forEach(batsmanCSV -> playerDataMap.put(batsmanCSV.getPlayerName(), new PlayerDAO(batsmanCSV)));
+                    .forEach(batsmanPlayerCSV -> playerDataMap.put(batsmanPlayerCSV.getPlayerName(), new PlayerDAO(batsmanPlayerCSV)));
         } catch (IOException e) {
             throw new PlayerAnalyserException(e.getMessage(),
                     PlayerAnalyserException.ExceptionType.CSV_FILE_PROBLEM);

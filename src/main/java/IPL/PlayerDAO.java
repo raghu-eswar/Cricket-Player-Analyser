@@ -15,20 +15,20 @@ public class PlayerDAO {
     private int fours;
     private int sixes;
 
-    public PlayerDAO(BatsmanCSV batsmanCSV) {
-        this.playerName = batsmanCSV.getPlayerName();
-        this.matchesPlayed = getInteger(batsmanCSV.getMatchesPlayed());
-        this.inningsPlayed = getInteger(batsmanCSV.getInningsPlayed());
-        this.notOutInnings = getInteger(batsmanCSV.getNotOutInnings());
-        this.totalRuns = getInteger(batsmanCSV.getTotalRuns());
-        this.highestScore = getInteger(batsmanCSV.getHighestScore());
-        this.battingAverage = getDouble(batsmanCSV.getBattingAverage());
-        this.ballsFaced = getInteger(batsmanCSV.getBallsFaced());
-        this.strikeRate = getDouble(batsmanCSV.getStrikeRate());
-        this.centuries = getInteger(batsmanCSV.getCenturies());
-        this.halfCenturies = getInteger(batsmanCSV.getHalfCenturies());
-        this.fours = getInteger(batsmanCSV.getFours());
-        this.sixes = getInteger(batsmanCSV.getSixes());
+    public PlayerDAO(BatsmanPlayerCSV batsmanPlayerCSV) {
+        this.playerName = batsmanPlayerCSV.getPlayerName();
+        this.matchesPlayed = getInteger(batsmanPlayerCSV.getMatchesPlayed());
+        this.inningsPlayed = getInteger(batsmanPlayerCSV.getMatchesPlayed());
+        this.notOutInnings = getInteger(batsmanPlayerCSV.getNotOutInnings());
+        this.totalRuns = getInteger(batsmanPlayerCSV.getTotalRuns());
+        this.highestScore = getInteger(batsmanPlayerCSV.getHighestScore());
+        this.battingAverage = getDouble(batsmanPlayerCSV.getBattingAverage());
+        this.ballsFaced = getInteger(batsmanPlayerCSV.getBallsFaced());
+        this.strikeRate = getDouble(batsmanPlayerCSV.getStrikeRate());
+        this.centuries = getInteger(batsmanPlayerCSV.getCenturies());
+        this.halfCenturies = getInteger(batsmanPlayerCSV.getHalfCenturies());
+        this.fours = getInteger(batsmanPlayerCSV.getFours());
+        this.sixes = getInteger(batsmanPlayerCSV.getSixes());
     }
 
     public String getPlayerName() {
