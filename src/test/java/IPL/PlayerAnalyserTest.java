@@ -12,7 +12,7 @@ public class PlayerAnalyserTest {
     private static final String IPL_WRONG_CSV_DATA_FILE_PATH = "./src/main/resources/IPL2019FactsheetMostRuns.csv";
 
     @Test
-    public void givenBatsmanCSVFileData_shouldReturn_correctNumberOfRecords() {
+    public void givenIplCSVFileData_shouldReturn_correctNumberOfRecords() {
         try {
             int noOfRecordsLoaded = new PlayerAnalyser().loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
             Assert.assertEquals(150, noOfRecordsLoaded);
@@ -22,7 +22,7 @@ public class PlayerAnalyserTest {
     }
 
     @Test
-    public void givenBatsmanCSVFileData_WithWrongFile_shouldThrowException() {
+    public void givenIplCSVFileData_WithWrongFile_shouldThrowException() {
         try {
             new PlayerAnalyser().loadPlayersData(IPL_WRONG_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
         } catch (PlayerAnalyserException e) {
@@ -31,7 +31,7 @@ public class PlayerAnalyserTest {
     }
 
     @Test
-    public void givenBatsmanCSVFileData_shouldReturn_sortedListByBattingAverageOfPlayers() {
+    public void givenIplCSVFileData_shouldReturn_sortedListByBattingAverageOfPlayers() {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
@@ -57,7 +57,7 @@ public class PlayerAnalyserTest {
     }
 
     @Test
-    public void givenBatsmanCSVFileData_shouldReturn_sortedListByStrikeRateOfPlayers() {
+    public void givenIplCSVFileData_shouldReturn_sortedListByStrikeRateOfPlayers() {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
@@ -73,7 +73,7 @@ public class PlayerAnalyserTest {
     }
 
     @Test
-    public void givenBatsmanCSVFileData_shouldReturn_sortedListByBoundariesOfPlayers() {
+    public void givenIplCSVFileData_shouldReturn_sortedListByBoundariesOfPlayers() {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
@@ -89,7 +89,7 @@ public class PlayerAnalyserTest {
     }
 
     @Test
-    public void givenBatsmanCSVFileData_shouldReturn_sortedListByStrikeRateAndBoundariesOfPlayers() {
+    public void givenIplCSVFileData_shouldReturn_sortedListByStrikeRateAndBoundariesOfPlayers() {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
@@ -105,7 +105,7 @@ public class PlayerAnalyserTest {
     }
 
     @Test
-    public void givenBatsmanCSVFileData_shouldReturn_sortedListByStrikeRateAndBatingAverageOfPlayers() {
+    public void givenIplCSVFileData_shouldReturn_sortedListByStrikeRateAndBatingAverageOfPlayers() {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
@@ -121,7 +121,7 @@ public class PlayerAnalyserTest {
     }
 
     @Test
-    public void givenBatsmanCSVFileData_shouldReturn_sortedListByRunsAndBatingAverageOfPlayers() {
+    public void givenIplCSVFileData_shouldReturn_sortedListByRunsAndBatingAverageOfPlayers() {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
@@ -137,7 +137,7 @@ public class PlayerAnalyserTest {
     }
 
     @Test
-    public void givenBatsmanCSVFileData_shouldReturn_sortedListByBowlingAverageOfPlayers() {
+    public void givenIplCSVFileData_shouldReturn_sortedListByBowlingAverageOfPlayers() {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
@@ -152,4 +152,20 @@ public class PlayerAnalyserTest {
         Assert.assertEquals("Shreyas Iyer", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
-}
+    @Test
+    public void givenIplCSVFileData_shouldReturn_sortedListByBowlingStrikeRateOfPlayers() {
+        PlayerAnalyser analyser = new PlayerAnalyser();
+        List<String> playerList = null;
+        try {
+            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
+            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BOWLING_STRIKE_RATE);
+        } catch (PlayerAnalyserException e) {
+            e.printStackTrace();
+        }
+        Gson g = new Gson();
+        Assert.assertEquals(150, playerList.size());
+        Assert.assertEquals("Alzarri Joseph", g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Shreyas Iyer", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
+    }
+
+    }

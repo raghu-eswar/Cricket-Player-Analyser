@@ -8,23 +8,21 @@ import java.util.*;
 public class PlayerAnalyser {
 
     public enum Options {
-        BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES,RUNS,BOWLING_AVERAGE
+        BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES, RUNS, BOWLING_AVERAGE, BOWLING_STRIKE_RATE
     }
 
     private enum PropertyNames {
         BATTING_AVERAGE("battingAverage"), BATING_STRIKE_RATE("batingStrikeRate"),
-        FOURS("fours"), SIXES("sixes"), RUNS("totalRuns"), BOWLING_AVERAGE("bowlingAverage");
+        FOURS("fours"), SIXES("sixes"), RUNS("totalRuns"), BOWLING_AVERAGE("bowlingAverage"),
+        BOWLING_STRIKE_RATE("bowlingStrikeRate");
         private final String fieldName;
         PropertyNames(String fieldName) {
             this.fieldName = fieldName;
         }
     }
 
-    private enum NegativeProperties {
-        bowlingAverage
-    }
-
     Map<String, PlayerDAO> playerDataMap;
+    private final String [] negativeProperties = {"bowlingAverage", "bowlingStrikeRate"};
 
     public int loadPlayersData(String batsmanCSVFilePath, String bowlerCSVFilePath) throws PlayerAnalyserException {
         this.playerDataMap = new PlayerDAOBuilder().loadPlayersData(batsmanCSVFilePath, bowlerCSVFilePath);
@@ -61,8 +59,8 @@ public class PlayerAnalyser {
     }
 
     private boolean isNegativeProperty(String fieldName) {
-        for(NegativeProperties property : NegativeProperties.values())
-            if (property.name().equals(fieldName))
+        for(String property : negativeProperties)
+            if (property.equals(fieldName))
                 return true;
         return false;
     }
