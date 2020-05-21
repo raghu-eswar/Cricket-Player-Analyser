@@ -207,8 +207,7 @@ public class PlayerAnalyserTest {
         List<String> playerList = null;
         try {
             analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
-            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BOWLING_STRIKE_RATE,
-                                                     PlayerAnalyser.Options.BOWLING_AVERAGE);
+            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BOWLING_STRIKE_RATE, PlayerAnalyser.Options.BOWLING_AVERAGE);
         } catch (PlayerAnalyserException e) {
             e.printStackTrace();
         }
@@ -224,8 +223,7 @@ public class PlayerAnalyserTest {
         List<String> playerList = null;
         try {
             analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
-            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.WICKETS_TAKEN,
-                    PlayerAnalyser.Options.BOWLING_AVERAGE);
+            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.WICKETS_TAKEN, PlayerAnalyser.Options.BOWLING_AVERAGE);
         } catch (PlayerAnalyserException e) {
             e.printStackTrace();
         }
@@ -241,8 +239,7 @@ public class PlayerAnalyserTest {
         List<String> playerList = null;
         try {
             analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
-            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BATTING_AVERAGE,
-                    PlayerAnalyser.Options.BOWLING_AVERAGE);
+            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BATTING_AVERAGE, PlayerAnalyser.Options.BOWLING_AVERAGE);
         } catch (PlayerAnalyserException e) {
             e.printStackTrace();
         }
@@ -250,6 +247,22 @@ public class PlayerAnalyserTest {
         Assert.assertEquals(150, playerList.size());
         Assert.assertEquals("Andre Russell", g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
         Assert.assertEquals("Harpreet Brar", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
+    }
+
+    @Test
+    public void givenIplCSVFileData_shouldReturn_sortedListByMostRunsAndWicketsOfPlayers() {
+        PlayerAnalyser analyser = new PlayerAnalyser();
+        List<String> playerList = null;
+        try {
+            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
+            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.RUNS, PlayerAnalyser.Options.WICKETS_TAKEN);
+        } catch (PlayerAnalyserException e) {
+            e.printStackTrace();
+        }
+        Gson g = new Gson();
+        Assert.assertEquals(150, playerList.size());
+        Assert.assertEquals("Imran Tahir", g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Hanuma Vihari", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
 }
