@@ -9,14 +9,14 @@ public class PlayerAnalyser {
 
     public enum Options {
         BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES, RUNS, BOWLING_AVERAGE, BOWLING_STRIKE_RATE, BOWLING_ECONOMY,
-        FOUR_WICKETS_IN_INNINGS,FIVE_WICKETS_IN_INNINGS
+        FOUR_WICKETS_IN_INNINGS,FIVE_WICKETS_IN_INNINGS, WICKETS_TAKEN
     }
 
     private enum PropertyNames {
         BATTING_AVERAGE("battingAverage"), BATING_STRIKE_RATE("batingStrikeRate"),
         FOURS("fours"), SIXES("sixes"), RUNS("totalRuns"), BOWLING_AVERAGE("bowlingAverage"),
         BOWLING_STRIKE_RATE("bowlingStrikeRate"), BOWLING_ECONOMY("economy"), FOUR_WICKETS_IN_INNINGS("fourWicketsInInnings"),
-        FIVE_WICKETS_IN_INNINGS("fiveWicketsInInnings");
+        FIVE_WICKETS_IN_INNINGS("fiveWicketsInInnings"), WICKETS_TAKEN("wicketsTaken");
         private final String fieldName;
         PropertyNames(String fieldName) {
             this.fieldName = fieldName;
