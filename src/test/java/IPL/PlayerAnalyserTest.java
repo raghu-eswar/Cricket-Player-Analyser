@@ -42,8 +42,8 @@ public class PlayerAnalyserTest {
         }
         Gson g = new Gson();
         Assert.assertEquals(150, playerList.size());
-        Assert.assertEquals("MS Dhoni",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("MS Dhoni",g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
     @Test
@@ -68,8 +68,8 @@ public class PlayerAnalyserTest {
         }
         Gson g = new Gson();
         Assert.assertEquals(150, playerList.size());
-        Assert.assertEquals("Ishant Sharma",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("Ishant Sharma",g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
     @Test
@@ -84,8 +84,8 @@ public class PlayerAnalyserTest {
         }
         Gson g = new Gson();
         Assert.assertEquals(150, playerList.size());
-        Assert.assertEquals("Andre Russell",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("Andre Russell",g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
     @Test
@@ -100,8 +100,8 @@ public class PlayerAnalyserTest {
         }
         Gson g = new Gson();
         Assert.assertEquals(150, playerList.size());
-        Assert.assertEquals("Andre Russell",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("Andre Russell",g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
     @Test
@@ -116,8 +116,8 @@ public class PlayerAnalyserTest {
         }
         Gson g = new Gson();
         Assert.assertEquals(150, playerList.size());
-        Assert.assertEquals("MS Dhoni",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("MS Dhoni",g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
     @Test
@@ -132,8 +132,8 @@ public class PlayerAnalyserTest {
         }
         Gson g = new Gson();
         Assert.assertEquals(150, playerList.size());
-        Assert.assertEquals("David Warner",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Hanuma Vihari", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("David Warner",g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Hanuma Vihari", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
     @Test
@@ -148,8 +148,8 @@ public class PlayerAnalyserTest {
         }
         Gson g = new Gson();
         Assert.assertEquals(150, playerList.size());
-        Assert.assertEquals("Anukul Roy",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Shreyas Iyer", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("Anukul Roy",g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Shreyas Iyer", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
 }
