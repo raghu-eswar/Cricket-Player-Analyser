@@ -8,11 +8,12 @@ import java.util.*;
 public class PlayerAnalyser {
 
     public enum Options {
-        BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES
+        BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES,RUNS;
     }
 
     private enum PropertyNames {
-        BATTING_AVERAGE("battingAverage"), BATING_STRIKE_RATE("batingStrikeRate"),FOURS("fours"), SIXES("sixes");
+        BATTING_AVERAGE("battingAverage"), BATING_STRIKE_RATE("batingStrikeRate"),
+        FOURS("fours"), SIXES("sixes"), RUNS("totalRuns");
         private final String fieldName;
         PropertyNames(String fieldName) {
             this.fieldName = fieldName;

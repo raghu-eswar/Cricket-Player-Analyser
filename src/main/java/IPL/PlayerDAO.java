@@ -28,7 +28,7 @@ public class PlayerDAO {
     public PlayerDAO() {  }
 
     public PlayerDAO(String playerName, String matchesPlayed, String inningsPlayed, String totalRuns) {
-        this.playerName = playerName;
+        this.playerName = playerName.trim();
         this.matchesPlayed = getInteger(matchesPlayed);
         this.inningsPlayed = getInteger(inningsPlayed);
         this.totalRuns = getInteger(totalRuns);
