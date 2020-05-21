@@ -2,7 +2,7 @@ package IPL;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class BatsmanPlayerCSV {
+public class BowlerCSV {
 
     @CsvBindByName(column = "PLAYER", required = true)
     private String playerName;
@@ -13,35 +13,32 @@ public class BatsmanPlayerCSV {
     @CsvBindByName(column = "Inns", required = true)
     private String inningsPlayed;
 
-    @CsvBindByName(column = "NO", required = true)
-    private String notOutInnings;
+    @CsvBindByName(column = "Ov", required = true)
+    private String oversBowled;
 
     @CsvBindByName(column = "Runs", required = true)
     private String totalRuns;
 
-    @CsvBindByName(column = "HS", required = true)
-    private String highestScore;
+    @CsvBindByName(column = "Wkts", required = true)
+    private String wicketsTaken;
 
     @CsvBindByName(column = "Avg", required = true)
-    private String battingAverage;
+    private String bowlingAverage;
 
-    @CsvBindByName(column = "BF", required = true)
-    private String ballsFaced;
+    @CsvBindByName(column = "BBI", required = true)
+    private String bestBowlingInning;
 
     @CsvBindByName(column = "SR", required = true)
-    private String strikeRate;
+    private String bowlingStrikeRate;
 
-    @CsvBindByName(column = "100", required = true)
-    private String centuries;
+    @CsvBindByName(column = "Econ", required = true)
+    private String economy;
 
-    @CsvBindByName(column = "50", required = true)
-    private String halfCenturies;
+    @CsvBindByName(column = "4w", required = true)
+    private String fourWicketsInInnings;
 
-    @CsvBindByName(column = "4s", required = true)
-    private String fours;
-
-    @CsvBindByName(column = "6s", required = true)
-    private String sixes;
+    @CsvBindByName(column = "5w", required = true)
+    private String fiveWicketsInInnings;
 
     public String getPlayerName() {
         return playerName;
@@ -55,43 +52,39 @@ public class BatsmanPlayerCSV {
         return inningsPlayed;
     }
 
-    public String getNotOutInnings() {
-        return notOutInnings;
+    public String getOversBowled() {
+        return oversBowled;
     }
 
     public String getTotalRuns() {
         return totalRuns;
     }
 
-    public String getHighestScore() {
-        return highestScore;
+    public String getWicketsTaken() {
+        return wicketsTaken;
     }
 
-    public String getBattingAverage() {
-        return battingAverage;
+    public String getBowlingAverage() {
+        return bowlingAverage;
     }
 
-    public String getBallsFaced() {
-        return ballsFaced;
+    public String getBestBowlingInning() {
+        return bestBowlingInning;
     }
 
-    public String getStrikeRate() {
-        return strikeRate;
+    public String getBowlingStrikeRate() {
+        return bowlingStrikeRate;
     }
 
-    public String getCenturies() {
-        return centuries;
+    public String getEconomy() {
+        return economy;
     }
 
-    public String getHalfCenturies() {
-        return halfCenturies;
+    public String getFourWicketsInInnings() {
+        return fourWicketsInInnings;
     }
 
-    public String getFours() {
-        return fours;
-    }
-
-    public String getSixes() {
-        return sixes;
+    public String getFiveWicketsInInnings() {
+        return fiveWicketsInInnings;
     }
 }

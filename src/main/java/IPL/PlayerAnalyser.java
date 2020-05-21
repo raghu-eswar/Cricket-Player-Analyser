@@ -9,11 +9,11 @@ import java.util.*;
 public class PlayerAnalyser {
 
     public enum Options {
-        BATTING_AVERAGE, STRIKE_RATE, FOURS, SIXES;
+        BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES
     }
 
     private enum PropertyNames {
-        BATTING_AVERAGE("battingAverage"), STRIKE_RATE("strikeRate"),FOURS("fours"), SIXES("sixes");
+        BATTING_AVERAGE("battingAverage"), BATING_STRIKE_RATE("batingStrikeRate"),FOURS("fours"), SIXES("sixes");
         private final String fieldName;
         PropertyNames(String fieldName) {
             this.fieldName = fieldName;
@@ -22,8 +22,8 @@ public class PlayerAnalyser {
 
     Map<String, PlayerDAO> playerDataMap;
 
-    public int loadPlayersData(String csvFilePath) throws PlayerAnalyserException {
-        this.playerDataMap = new PlayerDAOBuilder().loadPlayersData(csvFilePath);
+    public int loadPlayersData(String batsmanCSVFilePath, String bowlerCSVFilePath) throws PlayerAnalyserException {
+        this.playerDataMap = new PlayerDAOBuilder().loadPlayersData(batsmanCSVFilePath, bowlerCSVFilePath);
         return this.playerDataMap.size();
     }
 
@@ -44,8 +44,9 @@ public class PlayerAnalyser {
     }
 
     private double getPlayerRating(PlayerDAO playerDAO, String fieldName, double finalMaxValue) {
+
         try {
-            return ((Double.parseDouble(PropertyUtils.getProperty(playerDAO, fieldName).toString()))/ finalMaxValue)*100;
+            return ((Double.parseDouble(PropertyUtils.getProperty(playerDAO, fieldName).toString())) / finalMaxValue) * 100;
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -54,7 +55,7 @@ public class PlayerAnalyser {
 
     private void setPlayersRating(String ... fieldNames) {
         for (PlayerDAO player:playerDataMap.values()) {
-            double maxValue = 0;
+            double maxValue;
             double rating = 0;
             try {
                 for (String fieldName : fieldNames) {

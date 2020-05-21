@@ -29,7 +29,7 @@ public class BatsmanCSV {
     private String ballsFaced;
 
     @CsvBindByName(column = "SR", required = true)
-    private String strikeRate;
+    private String batingStrikeRate;
 
     @CsvBindByName(column = "100", required = true)
     private String centuries;
@@ -75,8 +75,8 @@ public class BatsmanCSV {
         return ballsFaced;
     }
 
-    public String getStrikeRate() {
-        return strikeRate;
+    public String getBatingStrikeRate() {
+        return batingStrikeRate;
     }
 
     public String getCenturies() {

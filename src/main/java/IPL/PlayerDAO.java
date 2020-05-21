@@ -1,39 +1,66 @@
 package IPL;
 
 public class PlayerDAO {
-    private String playerName;
-    private int matchesPlayed;
-    private int inningsPlayed;
-    private int notOutInnings;
-    private int totalRuns;
-    private int highestScore;
-    private double battingAverage;
-    private int ballsFaced;
-    private double strikeRate;
-    private int centuries;
-    private int halfCenturies;
-    private int fours;
-    private int sixes;
-    private double rating;
+    public String playerName;
+    public int matchesPlayed;
+    public int inningsPlayed;
+    public int notOutInnings;
+    public int totalRuns;
+    public int highestScore;
+    public double battingAverage;
+    public int ballsFaced;
+    public double batingStrikeRate;
+    public int centuries;
+    public int halfCenturies;
+    public int fours;
+    public int sixes;
+    public double oversBowled;
+    public int wicketsTaken;
+    public double bowlingAverage;
+    public int bestBowlingInning;
+    public double bowlingStrikeRate;
+    public double economy;
+    public int fourWicketsInInnings;
+    public int fiveWicketsInInnings;
+    public double rating;
 
-    public PlayerDAO(BatsmanPlayerCSV batsmanPlayerCSV) {
-        this.playerName = batsmanPlayerCSV.getPlayerName();
-        this.matchesPlayed = getInteger(batsmanPlayerCSV.getMatchesPlayed());
-        this.inningsPlayed = getInteger(batsmanPlayerCSV.getMatchesPlayed());
-        this.notOutInnings = getInteger(batsmanPlayerCSV.getNotOutInnings());
-        this.totalRuns = getInteger(batsmanPlayerCSV.getTotalRuns());
-        this.highestScore = getInteger(batsmanPlayerCSV.getHighestScore());
-        this.battingAverage = getDouble(batsmanPlayerCSV.getBattingAverage());
-        this.ballsFaced = getInteger(batsmanPlayerCSV.getBallsFaced());
-        this.strikeRate = getDouble(batsmanPlayerCSV.getStrikeRate());
-        this.centuries = getInteger(batsmanPlayerCSV.getCenturies());
-        this.halfCenturies = getInteger(batsmanPlayerCSV.getHalfCenturies());
-        this.fours = getInteger(batsmanPlayerCSV.getFours());
-        this.sixes = getInteger(batsmanPlayerCSV.getSixes());
+
+    public PlayerDAO() {  }
+
+    public PlayerDAO(String playerName, String matchesPlayed, String inningsPlayed, String totalRuns) {
+        this.playerName = playerName;
+        this.matchesPlayed = getInteger(matchesPlayed);
+        this.inningsPlayed = getInteger(inningsPlayed);
+        this.totalRuns = getInteger(totalRuns);
     }
 
-    public PlayerDAO() {
+    public PlayerDAO(BatsmanCSV batsmanCSV) {
+        this(batsmanCSV.getPlayerName(), batsmanCSV.getMatchesPlayed(), batsmanCSV.getInningsPlayed(), batsmanCSV.getTotalRuns());
+        this.notOutInnings = getInteger(batsmanCSV.getNotOutInnings());
+        this.highestScore = getInteger(batsmanCSV.getHighestScore());
+        this.battingAverage = getDouble(batsmanCSV.getBattingAverage());
+        this.ballsFaced = getInteger(batsmanCSV.getBallsFaced());
+        this.batingStrikeRate = getDouble(batsmanCSV.getBatingStrikeRate());
+        this.centuries = getInteger(batsmanCSV.getCenturies());
+        this.halfCenturies = getInteger(batsmanCSV.getHalfCenturies());
+        this.fours = getInteger(batsmanCSV.getFours());
+        this.sixes = getInteger(batsmanCSV.getSixes());
+    }
 
+    public PlayerDAO(BowlerCSV bowlerCSV) {
+        this(bowlerCSV.getPlayerName(), bowlerCSV.getMatchesPlayed(), bowlerCSV.getInningsPlayed(), bowlerCSV.getTotalRuns());
+         setBowlingData(bowlerCSV);
+    }
+
+    public void setBowlingData(BowlerCSV bowlerCSV) {
+        this.oversBowled = getDouble(bowlerCSV.getOversBowled());
+        this.wicketsTaken = getInteger(bowlerCSV.getWicketsTaken());
+        this.bowlingAverage = getDouble(bowlerCSV.getBowlingAverage());
+        this.bestBowlingInning = getInteger(bowlerCSV.getBestBowlingInning());
+        this.economy = getDouble(bowlerCSV.getEconomy());
+        this.bowlingStrikeRate = getDouble(bowlerCSV.getBowlingStrikeRate());
+        this.fourWicketsInInnings = getInteger(bowlerCSV.getFourWicketsInInnings());
+        this.fiveWicketsInInnings = getInteger(bowlerCSV.getFiveWicketsInInnings());
     }
 
     public String getPlayerName() {
@@ -100,12 +127,12 @@ public class PlayerDAO {
         this.ballsFaced = ballsFaced;
     }
 
-    public double getStrikeRate() {
-        return strikeRate;
+    public double getBatingStrikeRate() {
+        return batingStrikeRate;
     }
 
-    public void setStrikeRate(double strikeRate) {
-        this.strikeRate = strikeRate;
+    public double getBowlingStrikeRate() {
+        return bowlingStrikeRate;
     }
 
     public int getCenturies() {
@@ -138,6 +165,62 @@ public class PlayerDAO {
 
     public void setSixes(int sixes) {
         this.sixes = sixes;
+    }
+
+    public double getOversBowled() {
+        return oversBowled;
+    }
+
+    public void setOversBowled(double oversBowled) {
+        this.oversBowled = oversBowled;
+    }
+
+    public int getWicketsTaken() {
+        return wicketsTaken;
+    }
+
+    public void setWicketsTaken(int wicketsTaken) {
+        this.wicketsTaken = wicketsTaken;
+    }
+
+    public double getBowlingAverage() {
+        return bowlingAverage;
+    }
+
+    public void setBowlingAverage(double bowlingAverage) {
+        this.bowlingAverage = bowlingAverage;
+    }
+
+    public int getBestBowlingInning() {
+        return bestBowlingInning;
+    }
+
+    public void setBestBowlingInning(int bestBowlingInning) {
+        this.bestBowlingInning = bestBowlingInning;
+    }
+
+    public double getEconomy() {
+        return economy;
+    }
+
+    public void setEconomy(double economy) {
+        this.economy = economy;
+    }
+
+    public int getFourWicketsInInnings() {
+        return fourWicketsInInnings;
+    }
+
+    public void setFourWicketsInInnings(int fourWicketsInInnings) {
+        this.fourWicketsInInnings = fourWicketsInInnings;
+    }
+
+    public int getFiveWicketsInInnings() {
+        return fiveWicketsInInnings;
+    }
+
+    public void setFiveWicketsInInnings(int fiveWicketsInInnings) {
+        this.fiveWicketsInInnings = fiveWicketsInInnings;
     }
 
     public double getRating() {
@@ -181,11 +264,20 @@ public class PlayerDAO {
                 ", highestScore=" + highestScore +
                 ", battingAverage=" + battingAverage +
                 ", ballsFaced=" + ballsFaced +
-                ", strikeRate=" + strikeRate +
+                ", batingStrikeRate=" + batingStrikeRate +
                 ", centuries=" + centuries +
                 ", halfCenturies=" + halfCenturies +
                 ", fours=" + fours +
                 ", sixes=" + sixes +
+                ", oversBowled=" + oversBowled +
+                ", wicketsTaken=" + wicketsTaken +
+                ", bowlingAverage=" + bowlingAverage +
+                ", bestBowlingInning=" + bestBowlingInning +
+                ", bowlingStrikeRate=" + bowlingStrikeRate +
+                ", economy=" + economy +
+                ", fourWicketsInInnings=" + fourWicketsInInnings +
+                ", fiveWicketsInInnings=" + fiveWicketsInInnings +
+                ", rating=" + rating +
                 '}';
     }
 

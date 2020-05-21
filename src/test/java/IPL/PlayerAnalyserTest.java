@@ -14,8 +14,8 @@ public class PlayerAnalyserTest {
     @Test
     public void givenBatsmanCSVFileData_shouldReturn_correctNumberOfRecords() {
         try {
-            int noOfRecordsLoaded = new PlayerAnalyser().loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH);
-            Assert.assertEquals(100, noOfRecordsLoaded);
+            int noOfRecordsLoaded = new PlayerAnalyser().loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
+            Assert.assertEquals(150, noOfRecordsLoaded);
         } catch (PlayerAnalyserException e) {
             e.printStackTrace();
         }
@@ -24,7 +24,7 @@ public class PlayerAnalyserTest {
     @Test
     public void givenBatsmanCSVFileData_WithWrongFile_shouldThrowException() {
         try {
-            new PlayerAnalyser().loadPlayersData(IPL_WRONG_CSV_DATA_FILE_PATH);
+            new PlayerAnalyser().loadPlayersData(IPL_WRONG_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
         } catch (PlayerAnalyserException e) {
             Assert.assertEquals(PlayerAnalyserException.ExceptionType.CSV_FILE_PROBLEM,e.type);
         }
@@ -35,15 +35,15 @@ public class PlayerAnalyserTest {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
-            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH);
+            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
             playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BATTING_AVERAGE);
         } catch (PlayerAnalyserException e) {
             e.printStackTrace();
         }
         Gson g = new Gson();
-        Assert.assertEquals(100, playerList.size());
+        Assert.assertEquals(150, playerList.size());
         Assert.assertEquals("MS Dhoni",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Harpreet Brar", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
     }
 
     @Test
@@ -61,15 +61,15 @@ public class PlayerAnalyserTest {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
-            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH);
-            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.STRIKE_RATE);
+            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
+            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BATING_STRIKE_RATE);
         } catch (PlayerAnalyserException e) {
             e.printStackTrace();
         }
         Gson g = new Gson();
-        Assert.assertEquals(100, playerList.size());
+        Assert.assertEquals(150, playerList.size());
         Assert.assertEquals("Ishant Sharma",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Bhuvneshwar Kumar", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
     }
 
     @Test
@@ -77,15 +77,15 @@ public class PlayerAnalyserTest {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
-            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH);
+            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
             playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.FOURS, PlayerAnalyser.Options.SIXES);
         } catch (PlayerAnalyserException e) {
             e.printStackTrace();
         }
         Gson g = new Gson();
-        Assert.assertEquals(100, playerList.size());
+        Assert.assertEquals(150, playerList.size());
         Assert.assertEquals("Andre Russell",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Shakib Al Hasan", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
     }
 
     @Test
@@ -93,15 +93,15 @@ public class PlayerAnalyserTest {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
-            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH);
-            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.STRIKE_RATE,PlayerAnalyser.Options.FOURS, PlayerAnalyser.Options.SIXES);
+            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH,IPL_BOWLERS_CSV_DATA_FILE_PATH);
+            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BATING_STRIKE_RATE,PlayerAnalyser.Options.FOURS, PlayerAnalyser.Options.SIXES);
         } catch (PlayerAnalyserException e) {
             e.printStackTrace();
         }
         Gson g = new Gson();
-        Assert.assertEquals(100, playerList.size());
+        Assert.assertEquals(150, playerList.size());
         Assert.assertEquals("Andre Russell",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Bhuvneshwar Kumar", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
     }
 
     @Test
@@ -109,14 +109,14 @@ public class PlayerAnalyserTest {
         PlayerAnalyser analyser = new PlayerAnalyser();
         List<String> playerList = null;
         try {
-            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH);
-            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.STRIKE_RATE,PlayerAnalyser.Options.BATTING_AVERAGE);
+            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH,IPL_BOWLERS_CSV_DATA_FILE_PATH);
+            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BATING_STRIKE_RATE,PlayerAnalyser.Options.BATTING_AVERAGE);
         } catch (PlayerAnalyserException e) {
             e.printStackTrace();
         }
         Gson g = new Gson();
-        Assert.assertEquals(100, playerList.size());
+        Assert.assertEquals(150, playerList.size());
         Assert.assertEquals("MS Dhoni",g.fromJson(playerList.get(0), PlayerDTO.class).getPlayerName());
-        Assert.assertEquals("Bhuvneshwar Kumar", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
+        Assert.assertEquals("Mayank Markande", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).getPlayerName());
     }
 }

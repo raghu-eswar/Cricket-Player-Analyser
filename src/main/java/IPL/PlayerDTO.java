@@ -24,7 +24,7 @@ public class PlayerDTO {
         this.highestScore = playerDAO.getHighestScore();
         this.battingAverage = playerDAO.getBattingAverage();
         this.ballsFaced = playerDAO.getBallsFaced();
-        this.strikeRate = playerDAO.getStrikeRate();
+        this.strikeRate = playerDAO.getBatingStrikeRate();
         this.centuries = playerDAO.getCenturies();
         this.halfCenturies = playerDAO.getHalfCenturies();
         this.fours = playerDAO.getFours();
