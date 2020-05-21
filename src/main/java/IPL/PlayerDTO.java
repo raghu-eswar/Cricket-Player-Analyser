@@ -9,11 +9,19 @@ public class PlayerDTO {
     private final int highestScore;
     private final double battingAverage;
     private final int ballsFaced;
-    private final double strikeRate;
+    private final double batingStrikeRate;
     private final int centuries;
     private final int halfCenturies;
     private final int fours;
     private final int sixes;
+    private final double oversBowled;
+    private final int wicketsTaken;
+    private final double bowlingAverage;
+    private final int bestBowlingInning;
+    private final double bowlingStrikeRate;
+    private final double economy;
+    private final int fourWicketsInInnings;
+    private final int fiveWicketsInInnings;
 
     public PlayerDTO(PlayerDAO playerDAO) {
         this.playerName = playerDAO.playerName;
@@ -24,11 +32,19 @@ public class PlayerDTO {
         this.highestScore = playerDAO.highestScore;
         this.battingAverage = playerDAO.battingAverage;
         this.ballsFaced = playerDAO.ballsFaced;
-        this.strikeRate = playerDAO.batingStrikeRate;
+        this.batingStrikeRate = playerDAO.batingStrikeRate;
         this.centuries = playerDAO.centuries;
         this.halfCenturies = playerDAO.halfCenturies;
         this.fours = playerDAO.fours;
         this.sixes = playerDAO.sixes;
+        this.oversBowled = playerDAO.oversBowled;
+        this.wicketsTaken = playerDAO.wicketsTaken;
+        this.bowlingAverage = playerDAO.bowlingAverage;
+        this.bestBowlingInning = playerDAO.bestBowlingInning;
+        this.economy = playerDAO.economy;
+        this.bowlingStrikeRate = playerDAO.bowlingStrikeRate;
+        this.fourWicketsInInnings = playerDAO.fourWicketsInInnings;
+        this.fiveWicketsInInnings = playerDAO.fiveWicketsInInnings;
     }
 
     public String getPlayerName() {
@@ -63,8 +79,8 @@ public class PlayerDTO {
         return ballsFaced;
     }
 
-    public double getStrikeRate() {
-        return strikeRate;
+    public double getBatingStrikeRate() {
+        return batingStrikeRate;
     }
 
     public int getCenturies() {
@@ -83,4 +99,35 @@ public class PlayerDTO {
         return sixes;
     }
 
+    public double getOversBowled() {
+        return oversBowled;
+    }
+
+    public int getWicketsTaken() {
+        return wicketsTaken;
+    }
+
+    public double getBowlingAverage() {
+        return bowlingAverage;
+    }
+
+    public int getBestBowlingInning() {
+        return bestBowlingInning;
+    }
+
+    public double getBowlingStrikeRate() {
+        return bowlingStrikeRate;
+    }
+
+    public double getEconomy() {
+        return economy;
+    }
+
+    public int getFourWicketsInInnings() {
+        return fourWicketsInInnings;
+    }
+
+    public int getFiveWicketsInInnings() {
+        return fiveWicketsInInnings;
+    }
 }

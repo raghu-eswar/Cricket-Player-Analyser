@@ -8,16 +8,20 @@ import java.util.*;
 public class PlayerAnalyser {
 
     public enum Options {
-        BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES,RUNS;
+        BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES,RUNS,BOWLING_AVERAGE
     }
 
     private enum PropertyNames {
         BATTING_AVERAGE("battingAverage"), BATING_STRIKE_RATE("batingStrikeRate"),
-        FOURS("fours"), SIXES("sixes"), RUNS("totalRuns");
+        FOURS("fours"), SIXES("sixes"), RUNS("totalRuns"), BOWLING_AVERAGE("bowlingAverage");
         private final String fieldName;
         PropertyNames(String fieldName) {
             this.fieldName = fieldName;
         }
+    }
+
+    private enum NegativeProperties {
+        bowlingAverage
     }
 
     Map<String, PlayerDAO> playerDataMap;
@@ -44,13 +48,23 @@ public class PlayerAnalyser {
     }
 
     private double getPlayerRating(PlayerDAO playerDAO, String fieldName, double finalMaxValue) {
-
+        double rating = 0;
         try {
-            return ((Double.parseDouble(playerDAO.getClass().getDeclaredField(fieldName).get(playerDAO).toString())) / finalMaxValue) * 100;
+            double propertyValue = (Double.parseDouble(playerDAO.getClass().getDeclaredField(fieldName).get(playerDAO).toString()));
+            if (propertyValue == 0)
+                return 0;
+            rating =  (propertyValue / finalMaxValue) * 100;
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
-        return 0;
+        return (isNegativeProperty(fieldName))? 100-rating : rating ;
+    }
+
+    private boolean isNegativeProperty(String fieldName) {
+        for(NegativeProperties property : NegativeProperties.values())
+            if (property.name().equals(fieldName))
+                return true;
+        return false;
     }
 
     private void setPlayersRating(String ... fieldNames) {
