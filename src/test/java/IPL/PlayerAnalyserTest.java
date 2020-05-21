@@ -201,4 +201,23 @@ public class PlayerAnalyserTest {
         Assert.assertEquals("Shreyas Iyer", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
     }
 
+    @Test
+    public void givenIplCSVFileData_shouldReturn_sortedListByBowlingStrikeRateAndAverageOfPlayers() {
+        PlayerAnalyser analyser = new PlayerAnalyser();
+        List<String> playerList = null;
+        try {
+            analyser.loadPlayersData(IPL_BATSMAN_CSV_DATA_FILE_PATH, IPL_BOWLERS_CSV_DATA_FILE_PATH);
+            playerList = analyser.getPlayersWithBest(PlayerAnalyser.Options.BOWLING_STRIKE_RATE,
+                                                     PlayerAnalyser.Options.BOWLING_AVERAGE);
+        } catch (PlayerAnalyserException e) {
+            e.printStackTrace();
+        }
+        Gson g = new Gson();
+        System.out.println(playerList);
+        Assert.assertEquals(150, playerList.size());
+        Assert.assertEquals("Alzarri Joseph", g.fromJson(playerList.get(0), PlayerDTO.class).playerName);
+        Assert.assertEquals("Shreyas Iyer", g.fromJson(playerList.get(playerList.size()-1), PlayerDTO.class).playerName);
+    }
+
+
 }
