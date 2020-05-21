@@ -8,13 +8,13 @@ import java.util.*;
 public class PlayerAnalyser {
 
     public enum Options {
-        BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES, RUNS, BOWLING_AVERAGE, BOWLING_STRIKE_RATE
+        BATTING_AVERAGE, BATING_STRIKE_RATE, FOURS, SIXES, RUNS, BOWLING_AVERAGE, BOWLING_STRIKE_RATE, BOWLING_ECONOMY
     }
 
     private enum PropertyNames {
         BATTING_AVERAGE("battingAverage"), BATING_STRIKE_RATE("batingStrikeRate"),
         FOURS("fours"), SIXES("sixes"), RUNS("totalRuns"), BOWLING_AVERAGE("bowlingAverage"),
-        BOWLING_STRIKE_RATE("bowlingStrikeRate");
+        BOWLING_STRIKE_RATE("bowlingStrikeRate"), BOWLING_ECONOMY("economy");
         private final String fieldName;
         PropertyNames(String fieldName) {
             this.fieldName = fieldName;
@@ -22,7 +22,7 @@ public class PlayerAnalyser {
     }
 
     Map<String, PlayerDAO> playerDataMap;
-    private final String [] negativeProperties = {"bowlingAverage", "bowlingStrikeRate"};
+    private final String [] negativeProperties = {"bowlingAverage", "bowlingStrikeRate", "economy"};
 
     public int loadPlayersData(String batsmanCSVFilePath, String bowlerCSVFilePath) throws PlayerAnalyserException {
         this.playerDataMap = new PlayerDAOBuilder().loadPlayersData(batsmanCSVFilePath, bowlerCSVFilePath);
