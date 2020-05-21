@@ -16,19 +16,19 @@ public class PlayerDTO {
     private final int sixes;
 
     public PlayerDTO(PlayerDAO playerDAO) {
-        this.playerName = playerDAO.getPlayerName();
-        this.matchesPlayed = playerDAO.getMatchesPlayed();
-        this.inningsPlayed = playerDAO.getInningsPlayed();
-        this.notOutInnings = playerDAO.getNotOutInnings();
-        this.totalRuns = playerDAO.getTotalRuns();
-        this.highestScore = playerDAO.getHighestScore();
-        this.battingAverage = playerDAO.getBattingAverage();
-        this.ballsFaced = playerDAO.getBallsFaced();
-        this.strikeRate = playerDAO.getBatingStrikeRate();
-        this.centuries = playerDAO.getCenturies();
-        this.halfCenturies = playerDAO.getHalfCenturies();
-        this.fours = playerDAO.getFours();
-        this.sixes = playerDAO.getSixes();
+        this.playerName = playerDAO.playerName;
+        this.matchesPlayed = playerDAO.matchesPlayed;
+        this.inningsPlayed = playerDAO.inningsPlayed;
+        this.notOutInnings = playerDAO.notOutInnings;
+        this.totalRuns = playerDAO.totalRuns;
+        this.highestScore = playerDAO.highestScore;
+        this.battingAverage = playerDAO.battingAverage;
+        this.ballsFaced = playerDAO.ballsFaced;
+        this.strikeRate = playerDAO.batingStrikeRate;
+        this.centuries = playerDAO.centuries;
+        this.halfCenturies = playerDAO.halfCenturies;
+        this.fours = playerDAO.fours;
+        this.sixes = playerDAO.sixes;
     }
 
     public String getPlayerName() {

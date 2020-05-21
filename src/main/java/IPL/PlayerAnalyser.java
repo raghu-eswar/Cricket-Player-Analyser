@@ -1,9 +1,8 @@
 package IPL;
 
 import com.google.gson.Gson;
-import org.apache.commons.beanutils.PropertyUtils;
 
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Field;
 import java.util.*;
 
 public class PlayerAnalyser {
@@ -38,7 +37,7 @@ public class PlayerAnalyser {
 
     private List<String> getPlayersWithBest(String ... fieldNames) {
         setPlayersRating(fieldNames);
-        Comparator<PlayerDAO> comparator = Comparator.comparing(PlayerDAO::getRating);
+        Comparator<PlayerDAO> comparator = Comparator.comparing(playerDAO -> playerDAO.rating);
         List<PlayerDTO> dtoList = buildPlayerDTO(sort(new ArrayList<>(playerDataMap.values()),comparator));
         return toJSONString(dtoList);
     }
@@ -46,8 +45,8 @@ public class PlayerAnalyser {
     private double getPlayerRating(PlayerDAO playerDAO, String fieldName, double finalMaxValue) {
 
         try {
-            return ((Double.parseDouble(PropertyUtils.getProperty(playerDAO, fieldName).toString())) / finalMaxValue) * 100;
-        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            return ((Double.parseDouble(playerDAO.getClass().getDeclaredField(fieldName).get(playerDAO).toString())) / finalMaxValue) * 100;
+        } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
         return 0;
@@ -59,14 +58,14 @@ public class PlayerAnalyser {
             double rating = 0;
             try {
                 for (String fieldName : fieldNames) {
-                    maxValue = Double.parseDouble(PropertyUtils.getProperty(getPlayerWithMaximumValue(fieldName), fieldName).toString());
+                    PlayerDAO playerWithMaximumValue = getPlayerWithMaximumValue(fieldName);
+                    maxValue = Double.parseDouble(playerWithMaximumValue.getClass().getDeclaredField(fieldName).get(playerWithMaximumValue).toString());
                     rating = rating + getPlayerRating(player, fieldName, maxValue);
                 }
-            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            } catch (IllegalAccessException | NoSuchFieldException e) {
                 e.printStackTrace();
             }
-            double finalRating = rating/fieldNames.length;
-            player.setRating(finalRating);
+            player.rating = rating/fieldNames.length;
         }
     }
 
@@ -75,10 +74,12 @@ public class PlayerAnalyser {
                 .stream()
                 .reduce(new PlayerDAO(), (p1, p2) -> {
                     try {
-                        double p1Value = Double.parseDouble(PropertyUtils.getProperty(p1, fieldName).toString());
-                        double p2Value = Double.parseDouble(PropertyUtils.getProperty(p2, fieldName).toString());
+                        Field field1 = p1.getClass().getDeclaredField(fieldName);
+                        Field field2 = p2.getClass().getDeclaredField(fieldName);
+                        double p1Value = Double.parseDouble(field1.get(p1).toString());
+                        double p2Value = Double.parseDouble(field2.get(p2).toString());
                         return (p1Value>p2Value)? p1 : p2;
-                    } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                    } catch (IllegalAccessException | NoSuchFieldException e) {
                         e.printStackTrace();
                     }
                     return p1;
